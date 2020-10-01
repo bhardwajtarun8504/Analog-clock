@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>
+         Analog Clock Trial
+      </title>
+      <style type="text/css">
+         body{
+                background-color: #1b2b2b;
+                color: #fff;
+                margin: 0%;
+                padding:0%;
+                text-align: center;
+                justify-content: center;
+                align-items: center;
+             }
+             .box
+             {
+                 position: absolute;
+                 top:20%;
+                 left:36%;
+                 width:300px;
+                 height:300px;
+                 border-radius:50%;
+
+                  /*for reflection below with linear transparency*/ 
+                 -webkit-box-reflect:below 1px linear-gradient(transparent,#000);
+                 box-shadow: 0px 0px 10px #fac3daf3;
+                 border:2px solid #fff;
+                  /*animation effect of tilting*//*You  can off it also */
+                 /* animation:swing 4s;
+                 animation-iteration-count: infinite;
+             
+             } */
+             /* @keyframes swing {
+                 0%{transform:rotateY(0deg);}
+                 30%{transform:rotateY(30deg);}
+                 50%{transform:rotateY(-10deg);}
+                 70%{transform:rotateZ(10deg);}
+                 100%{transform:rotateY(0deg);} 
+
+             } */
+             }
+             .frame
+             {   border-radius:50%;
+                 position: relative;
+                 top:14px;
+                 left:14px;
+                 width:90%;
+                 height:90%;
+                 box-shadow: 0px 0px 20px #fac3daf3;
+                 border:2px solid #fff;
+                 transform :rotateZ(1deg);
+                 background-image: url("../picture/rsz_clock.png");/*here a clock dial is added for adding numbers in background from 1-12*/
+             }
+            #centerDot
+            { 
+            border-radius:50%;
+            position: absolute;;
+            top:49%;
+            left:49%;
+            border:5px solid #fff;
+            width:1px;
+            height:1px;
+            align-items: center;
+            z-index:20;   /*z-index for alligning items layer by layer when positiob is absolute*/
+            background-color: #fff;
+        
+            }
+            #second
+            {
+                position: relative;
+                top:48%;
+                left:10%;
+                justify-content: center;
+                width:40%;
+                z-index:10;
+                border:2px solid #23f58c;
+                border-radius:50%;
+                transform-origin: 100%;
+            }
+            #hour
+            {
+                position: relative;
+                top:50%;
+                left:30%;
+                justify-content: center;
+                width:20%;
+                z-index:10;
+                border:2px solid #d8d8f3;
+                border-radius:20px 20px 0px 0px  ;
+                transform-origin: 100%;
+              
+            }
+            #minute
+            {
+                position: relative;
+                top:50%;
+                left:20%;
+                justify-content: center;
+                width:30%;
+                z-index:8;
+                border:2px solid #f5238c;
+                border-radius:20px 20px 0px 0px  ;
+                transform-origin: 100%;
+            }
+        
+       </style>
+    </head>
+    <body onload="clock()"><!--the onload event here is triggering clock() function below in script ,when the content is loaded on browser-->
+        <div class="box">
+            <div class="frame">
+                <div id="centerDot"></div>
+                <div id="hour"></div>
+                <div id="minute"></div>
+                <div id="second"></div>
+            </div>
+        </div>
+        <script>
+            function clock()//this function can also work if jquery file isn't linked//
+            {var date=new Date();
+
+             var sec=date.getSeconds()*6 +90;
+             var min=date.getMinutes()*6 + 90;
+             var hr=date.getHours()*30 + (min/12) +90;
+
+             var z=document.getElementById('second');
+             z.style.transform=`rotateZ(${sec}deg)`;
+
+             var x=document.getElementById('minute');
+             x.style.transform=`rotateZ(${min}deg)`;
+
+             var y=document.getElementById('hour');
+             y.style.transform=`rotateZ(${hr}deg)`;
+              
+            }
+           var interval=setInterval(clock,1000);//providing time interval for repeating of function at 1000 milliseconds interval//
+            console.log(interval);
+        </script>
+    </body>
+</html>
